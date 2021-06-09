@@ -1,4 +1,4 @@
-var socket = io("http://localhost");
+var socket = io("http://52.200.172.231:808");
 
 socket.on("rules", function (message) {
   let rules = message.rules;
