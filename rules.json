@@ -1,0 +1,64 @@
+[
+  {
+    "flow": "identify",
+    "rules": [
+      "Welcome!",
+      {
+        "message": "What's your name?",
+        "name": "name",
+        "type": "String",
+        "replyMessage": "Thanks, {name}!",
+        "next": "help.question"
+      }
+    ]
+  },
+  {
+    "flow": "help",
+    "rules": [
+      {
+        "message": "How can I help you?",
+        "name": "question",
+        "type": "SingleChoice",
+        "options": [
+          { "label": "Want to chat with agent.", "next": "help.chat" },
+          { "label": "Want to visit property.", "next": "help.visit" }
+        ]
+      },
+      {
+        "message": "Please enter your email and agent would contact you?",
+        "name": "chat",
+        "type": "String",
+        "replyMessage": "An agent will reach out to you in some time at {chat}",
+        "next": "endchat.check",
+        "validators": [{ "min": 4 }, { "minWords": 1 }, { "email": true }]
+      },
+      {
+        "message": "How do want to tour?",
+        "name": "visit",
+        "type": "SingleChoice",
+        "options": [
+          { "label": "Virtual tour", "next": "endchat.check" },
+          { "label": "Visit site", "next": "endchat.check" }
+        ]
+      }
+    ]
+  },
+  {
+    "flow": "endchat",
+    "rules": [
+      {
+        "message": "Do you have any other question?",
+        "name": "check",
+        "type": "SingleChoice",
+        "options": [
+          { "label": "Yes", "next": "help.question" },
+          { "label": "No", "next": "endchat.exit" }
+        ]
+      },
+      {
+        "message": "Thank you for visiting us",
+        "name": "exit"
+      }
+    ]
+  }
+]
