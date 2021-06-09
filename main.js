@@ -42,19 +42,15 @@ let messages = [];
 
 io.on("connection", (socket) => {
   console.log(`Socket connected: ${socket.id}`);
-  // socket.broadcast.emit('userConnected');
 
   socket.emit("rules", { id: socket.id, rules: rules });
 
   socket.on("message", (data) => {
     messages.push(data);
-    // socket.broadcast.emit("receivedMessage", data);
   });
 
   socket.on("reply", (data) => {
     messages.push(data);
-    // socket.broadcast.emit("receivedMessage", data);
-    console.log(messages);
   });
   socket.on("disconnect", () => {
     mongo.connect((err,db)=>{
@@ -62,7 +58,6 @@ io.on("connection", (socket) => {
         try {
           coll = mongo.collection("messages");
         } catch (e) {
-          console.log(e);
           coll = mongo.db("chatbot").collection("messages");
         } finally {
           coll.insertOne({
