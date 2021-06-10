@@ -2,7 +2,7 @@
   {
     "flow": "identify",
     "rules": [
-      "Hi, my name is Logan!",
+      "Hi, my name is Wolverine!",
       {
         "message": "What's your name?",
         "name": "name",
@@ -19,7 +19,7 @@
         "name": "start"
       },
       {
-        "message": "Would you be perhaps be interested in",
+        "message": "Would you be perhaps, interested in",
         "name": "question",
         "type": "SingleChoice",
         "options": [
