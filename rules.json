@@ -7,8 +7,7 @@
         "message": "What's your name?",
         "name": "name",
         "type": "String",
-        "replyMessage": "Thanks, {name}!",
-        "next": "help.question"
+        "next": "help.start"
       }
     ]
   },
@@ -16,30 +15,129 @@
     "flow": "help",
     "rules": [
       {
-        "message": "How can I help you?",
+        "message": "{name}, seems like you are intrested in this listing.",
+        "name": "start"
+      },
+      {
+        "message": "Would you be perhaps be interested in",
         "name": "question",
         "type": "SingleChoice",
         "options": [
-          { "label": "Want to chat with agent.", "next": "help.chat" },
-          { "label": "Want to visit property.", "next": "help.visit" }
+          { "label": "Virtual Tour", "next": "virtual.tour" },
+          { "label": "Schedule Appointment.", "next": "virtual.sched" }
+        ]
+      }
+    ]
+  },
+  {
+    "flow": "virtual",
+    "rules": [
+      {
+        "message":"I will be opening the virtual tour link for you",
+        "actions": {
+          "url":"www.propertypanorama.com/instaview/snd/140049652"
+        }
+      },
+      {
+        "message": "Did you like the virtual tour?",
+        "name": "tour",
+        "type": "singleChoice",
+        "options":[
+          {"label":"Yes", "next":"virtual.schedquestion"},
+          {"label":"No", "next":"virtual.another"}
         ]
       },
       {
-        "message": "Please enter your email and agent would contact you?",
-        "name": "chat",
+        "message": "Would you like to schedule appointment?",
+        "name": "schedquestion",
+        "type": "singleChoice",
+        "options":[
+          {"label":"Yes", "next":"virtual.sched"},
+          {"label":"No", "next":"endchat.check"}
+        ]
+      },
+      {
+        "message": "Would you like to check other properties in this state?",
+        "name": "another",
+        "type": "singleChoice",
+        "options":[
+          {"label":"Yes", "next":"virtual.another"},
+          {"label":"No", "next":"endchat.check"}
+        ]
+      },
+      {
+        "message": "Redirecting you in a bit to display properties for this state",
+        "name": "another",
+        "actions": {
+          "redirect":{
+            "url":"https://www.stage02.zengtest6.us/CA/San_Diego"
+          }
+        },
+        "next":"endchat.exit"
+      },
+      {
+        "message": "When do you want to schedule the appointment? (MM/DD/YY)",
+        "name": "sched",
         "type": "String",
-        "replyMessage": "An agent will reach out to you in some time at {chat}",
-        "next": "endchat.check",
-        "validators": [{ "min": 4 }, { "minWords": 1 }, { "email": true }]
+        "next":"virtual.contact"
       },
       {
-        "message": "How do want to tour?",
-        "name": "visit",
-        "type": "SingleChoice",
-        "options": [
-          { "label": "Virtual tour", "next": "endchat.check" },
-          { "label": "Visit site", "next": "endchat.check" }
+        "message": "Kindly let us know your email so Agent can reach out to you shortly",
+        "name": "contact",
+        "type": "String"
+      },
+      {
+        "message": "Are you good with providing your phone number as well?",
+        "name": "pChoice",
+        "type": "singleChoice",
+        "options":[
+          {"label":"Yes", "next":"virtual.phone"},
+          {"label":"No", "next":"virtual.noprob"}
         ]
+      },
+      {
+        "message": "Kindly let us know your contact number so Agent can reach out to you shortly",
+        "name": "phone",
+        "type": "String"
+      },
+      {
+        "message": "Our Agent will reach our to you shortly, meanwhile you can explore following stats: ",
+        "name": "noprob",
+        "options":[
+          {"label":"Schools", "next":"virtual.school"},
+          {"label":"Community", "next":"virtual.community"},
+          {"label":"Places of interest", "next":"virtual.poi"}
+        ]
+      },
+      {
+        "message": "Openning the schools stats for the state",
+        "name": "school",
+        "actions": {
+          "redirect":{
+            "url":"https://www.stage01.zengtest15.com/schools"
+          }
+        },
+        "next":"endchat.exit"
+      },
+      {
+        "message": "Openning the community stats for the state",
+        "name": "community",
+        "actions": {
+          "redirect":{
+            "url":"https://www.stage01.zengtest15.com/community"
+          }
+        },
+        "next":"endchat.exit"
+      },
+      {
+        "message": "Openning the points of interest for the state",
+        "name": "poi",
+        "actions": {
+          "redirect":{
+            "url":"https://www.stage01.zengtest15.com/points-of-interest"
+          }
+        },
+        "next":"endchat.exit"
       }
     ]
   },
@@ -56,7 +154,7 @@
         ]
       },
       {
-        "message": "Thank you for visiting us",
+        "message": "Thank you for visiting us.",
         "name": "exit"
       }
     ]

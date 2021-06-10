@@ -22,6 +22,16 @@ socket.on("rules", function (message) {
       }, 1000);
     });
 
+    // chat.actions.define("virtualtour", () => {
+    //     if($(`#propdetail_table > tbody:nth-child(1)`).text().includes('Virtual Tour')){
+    //         if($('#propdetail_table > tbody:nth-child(1) > tr:nth-child(8)').text().includes("Virtual Tour")){
+    //             return $('#propdetail_table > tbody:nth-child(1) > tr:nth-child(8) > td:nth-child(2) > a:nth-child(1)').attr('href')
+    //         }
+    //     }
+    //     return '';
+    //   });
+  
+
     chat
       .on("start", function (data) {
       })
