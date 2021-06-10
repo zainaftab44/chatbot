@@ -41,7 +41,7 @@
       {
         "message": "Did you like the virtual tour?",
         "name": "tour",
-        "type": "singleChoice",
+        "type": "SingleChoice",
         "options":[
           {"label":"Yes", "next":"virtual.schedquestion"},
           {"label":"No", "next":"virtual.another"}
@@ -50,7 +50,7 @@
       {
         "message": "Would you like to schedule appointment?",
         "name": "schedquestion",
-        "type": "singleChoice",
+        "type": "SingleChoice",
         "options":[
           {"label":"Yes", "next":"virtual.sched"},
           {"label":"No", "next":"endchat.check"}
@@ -59,7 +59,7 @@
       {
         "message": "Would you like to check other properties in this state?",
         "name": "another",
-        "type": "singleChoice",
+        "type": "SingleChoice",
         "options":[
           {"label":"Yes", "next":"virtual.another"},
           {"label":"No", "next":"endchat.check"}
@@ -89,7 +89,7 @@
       {
         "message": "Are you good with providing your phone number as well?",
         "name": "pChoice",
-        "type": "singleChoice",
+        "type": "SingleChoice",
         "options":[
           {"label":"Yes", "next":"virtual.phone"},
           {"label":"No", "next":"virtual.noprob"}
