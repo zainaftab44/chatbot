@@ -98,7 +98,8 @@
       {
         "message": "Kindly let us know your contact number so Agent can reach out to you shortly",
         "name": "phone",
-        "type": "String"
+        "type": "String",
+        "next":"virtual.noprob"
       },
       {
         "message": "Our Agent will reach our to you shortly, meanwhile you can explore following stats: ",
