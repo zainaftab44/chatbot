@@ -2,7 +2,7 @@
   {
     "flow": "identify",
     "rules": [
-      "Welcome!",
+      "Hi, my name is Logan!",
       {
         "message": "What's your name?",
         "name": "name",
