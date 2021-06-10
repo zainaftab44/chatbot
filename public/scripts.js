@@ -1,4 +1,5 @@
 var socket = io("http://52.200.172.231:808");
+// var socket = io("http://localhost:8082");
 
 socket.on("rules", function (message) {
   let rules = message.rules;
@@ -16,7 +17,14 @@ socket.on("rules", function (message) {
       warning: "Please enter a valid email",
     });
 
+    chat.actions.define("openurl", (url) => {
+      setTimeout(function () {
+        window.open(url,"_blank");
+      }, 1000);
+    });
+
     chat.actions.define("redirect", (url) => {
+      console.log(url)
       setTimeout(function () {
         window.location.assign(url);
       }, 1000);

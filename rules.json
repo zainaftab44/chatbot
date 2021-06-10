@@ -23,7 +23,7 @@
         "name": "question",
         "type": "SingleChoice",
         "options": [
-          { "label": "Virtual Tour", "next": "virtual.tour" },
+          { "label": "Virtual Tour", "next": "virtual.start" },
           { "label": "Schedule Appointment.", "next": "virtual.sched" }
         ]
       }
@@ -34,9 +34,10 @@
     "rules": [
       {
         "message":"I will be opening the virtual tour link for you",
-        "actions": {
-          "url":"www.propertypanorama.com/instaview/snd/140049652"
-        }
+        "name":"start",
+        "actions": [{
+          "openurl":"https://www.propertypanorama.com/instaview/snd/140049652"
+        }]
       },
       {
         "message": "Did you like the virtual tour?",
@@ -44,7 +45,7 @@
         "type": "SingleChoice",
         "options":[
           {"label":"Yes", "next":"virtual.schedquestion"},
-          {"label":"No", "next":"virtual.another"}
+          {"label":"No", "next":"virtual.others"}
         ]
       },
       {
@@ -58,7 +59,7 @@
       },
       {
         "message": "Would you like to check other properties in this state?",
-        "name": "another",
+        "name": "others",
         "type": "SingleChoice",
         "options":[
           {"label":"Yes", "next":"virtual.another"},
@@ -68,11 +69,9 @@
       {
         "message": "Redirecting you in a bit to display properties for this state",
         "name": "another",
-        "actions": {
-          "redirect":{
-            "url":"https://www.stage02.zengtest6.us/CA/San_Diego"
-          }
-        },
+        "actions": [{
+          "redirect":"https://www.stage02.zengtest6.us/CA/San_Diego"
+        }],
         "next":"endchat.exit"
       },
       {
@@ -104,6 +103,7 @@
       {
         "message": "Our Agent will reach our to you shortly, meanwhile you can explore following stats: ",
         "name": "noprob",
+        "type": "SingleChoice",
         "options":[
           {"label":"Schools", "next":"virtual.school"},
           {"label":"Community", "next":"virtual.community"},
@@ -113,31 +113,25 @@
       {
         "message": "Openning the schools stats for the state",
         "name": "school",
-        "actions": {
-          "redirect":{
-            "url":"https://www.stage01.zengtest15.com/schools"
-          }
-        },
+        "actions": [{
+          "redirect":"https://www.stage01.zengtest15.com/schools"
+        }],
         "next":"endchat.exit"
       },
       {
         "message": "Openning the community stats for the state",
         "name": "community",
-        "actions": {
-          "redirect":{
-            "url":"https://www.stage01.zengtest15.com/community"
-          }
-        },
+        "actions": [{
+          "redirect":"https://www.stage01.zengtest15.com/community"
+        }],
         "next":"endchat.exit"
       },
       {
         "message": "Openning the points of interest for the state",
         "name": "poi",
-        "actions": {
-          "redirect":{
-            "url":"https://www.stage01.zengtest15.com/points-of-interest"
-          }
-        },
+        "actions":[{
+          "redirect":"https://www.stage01.zengtest15.com/points-of-interest"
+        }],
         "next":"endchat.exit"
       }
     ]
