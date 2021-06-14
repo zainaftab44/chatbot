@@ -30,7 +30,7 @@ app.get("/messages", (req, res) => {
     } catch (e) {
       coll = mongo.db("chatbot").collection("messages");
     } finally {
-      coll.find({}).toArray((err, rs)=> {
+      coll.find({}).limit(20).toArray((err, rs)=> {
         if (err) throw err;
         res.json(rs);
       });
