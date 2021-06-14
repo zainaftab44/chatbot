@@ -19,12 +19,12 @@ socket.on("rules", function (message) {
 
     chat.actions.define("openurl", (url) => {
       setTimeout(function () {
-        window.open(url,"_blank");
+        window.open(url, "_blank");
       }, 1000);
     });
 
     chat.actions.define("redirect", (url) => {
-      console.log(url)
+      console.log(url);
       setTimeout(function () {
         window.location.assign(url);
       }, 1000);
@@ -38,10 +38,19 @@ socket.on("rules", function (message) {
     //     }
     //     return '';
     //   });
-  
 
     chat
       .on("start", function (data) {
+        let bot_container = document.getElementsByClassName("Chat")[0];
+        let i = document.createElement("span");
+        i.innerText = "-";
+        i.className = "btn btn-primary float-end rounded-circle fs-3";
+        i.onclick = (e) => {
+          let bot = document.getElementsByClassName("yvebot-chat")[0]
+          bot.style.display = bot.style.display=="none"?"":"none";
+          i.innerText=bot.style.display=="none"?"+":"-"
+        };
+        bot_container.insertBefore(i, bot_container.firstChild);
       })
       .on("reply", (message) => {
         socket.emit("reply", message);
@@ -56,6 +65,7 @@ socket.on("rules", function (message) {
   }
 });
 
+socket.emit("url", { message: window.location.href });
 // socket.on("rules1", function (message) {
 //   if (document.querySelector(".Chat")) {
 //     // const chat = new YveBot(rules, {
